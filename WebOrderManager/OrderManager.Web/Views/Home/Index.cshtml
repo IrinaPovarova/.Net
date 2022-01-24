@@ -1,0 +1,30 @@
+﻿@using OrderManager.BLL.DTO
+
+@model IEnumerable<OrderDTO>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (Model != null)
+{
+    <table>
+    <tr>
+                <th>OrderID</th>
+                <th>Status</th>
+                <th>ShipAddress</th>
+                <th>RequiredDate</th>
+            </tr>
+    @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.OrderID</td>
+                <td>@item.Status.ToString()</td>
+                <td>@item.ShipAddress</td>
+                <td>@item.RequiredDate.ToString()</td>
+            </tr>
+        }
+    </table>
+    
+}
+

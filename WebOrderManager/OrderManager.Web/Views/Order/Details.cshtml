@@ -1,0 +1,38 @@
+﻿@using OrderManager.BLL.DTO
+
+@model OrderDTO
+@{
+    ViewData["Title"] = "Order Details Page";
+}
+                <div>OrderID-@Model?.OrderID</div>
+                <div>Status-@Model?.Status.ToString()</div>
+                <div>ShipAddress-@Model?.ShipAddress</div>
+                <div>RequiredDate-@Model?.RequiredDate.ToString()</div>  
+
+
+
+@if (Model != null)
+{
+    <table>
+    <tr>
+                <th>OrderID</th>
+                <th>ProductID</th>
+                <th>ProductName</th>
+                <th>Quantity</th>
+                <th>UnitPrice</th>
+                <th>Discount</th>
+            </tr>
+    @foreach (var item in Model.OrderDetails)
+        {
+            <tr>
+                <td>@item.OrderID</td>
+                <td>@item.ProductID</td>
+                <td>@item.ProductName</td>
+                <td>@item.Quantity</td>
+                <td>@item.UnitPrice</td>
+                <td>@item.Discount</td>
+            </tr>
+        }
+    </table>
+    
+}

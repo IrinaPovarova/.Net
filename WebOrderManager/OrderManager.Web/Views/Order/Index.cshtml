@@ -1,0 +1,45 @@
+﻿@using OrderManager.BLL.DTO
+@using OrderManager.BLL.Enum
+@model IEnumerable<OrderDTO>
+
+@{
+    ViewData["Title"] = "Order List Page";
+}
+<a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Create">New</a>
+
+@if (Model != null)
+{
+    <table>
+    <tr>
+                <th>OrderID</th>
+                <th>Status</th>
+                <th>ShipAddress</th>
+                <th>RequiredDate</th>
+                <th>Actions</th>
+            </tr>
+    @foreach (var item in Model)
+        {
+            <tr>
+                <td> <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Details" asp-route-id="@item.OrderID">@item.OrderID</a></td>
+                <td>@item.Status.ToString()</td>
+                <td>@item.ShipAddress</td>
+                <td>@item.RequiredDate.ToString()</td>
+                <td> @if (item.Status != OrderStatuses.Completed)
+                    {
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Delete" asp-route-id="@item.OrderID">Delete</a>
+                    }
+                 <td> @if (item.Status == OrderStatuses.New)
+                    {
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Edit" asp-route-id="@item.OrderID">Edit</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="HandOverOrder" asp-route-id="@item.OrderID">HandOverOrder</a>
+                    }
+                    <td> @if (item.Status == OrderStatuses.InProgress)
+                    {
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="MarkAsCompleted" asp-route-id="@item.OrderID">MarkAsCompleted</a>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+    
+}
